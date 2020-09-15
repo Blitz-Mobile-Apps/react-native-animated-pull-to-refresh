@@ -34,8 +34,9 @@ $ cd ios
 $ pod install
 ```
 
-### Usage
 
+### Usage
+More examples can be found under the **examples** folder.
 ```jsx
 import React from 'react';
 import { Text, View, Dimensions, ScrollView, FlatList } from 'react-native' 

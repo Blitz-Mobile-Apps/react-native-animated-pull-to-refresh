@@ -115,10 +115,10 @@ class App extends React.Component {
         } 
         duration={2500}
 
-        pullAnimationSource={rocketAnim}
-        startRefreshAnimationSource={rocketAnim}
-        refreshAnimationSource={rocketAnim}
-        endRefreshAnimationSource={rocketAnim}
+        pullAnimationSource={yourAnimation}
+        startRefreshAnimationSource={yourAnimation}
+        refreshAnimationSource={yourAnimation}
+        endRefreshAnimationSource={yourAnimation}
 
       />
 

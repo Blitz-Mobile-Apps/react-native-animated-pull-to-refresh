@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { View, PanResponder, Animated, Dimensions, UIManager, LayoutAnimation, Easing } from 'react-native'
 import LottieView from 'lottie-react-native'
+import PropTypes from 'prop-types';
 
-export const vw = Dimensions.get('window').width * 0.01
-export const vh = Dimensions.get('window').height * 0.01
+const vw = Dimensions.get('window').width * 0.01
+const vh = Dimensions.get('window').height * 0.01
 
 
 class AnimatedPullToRefresh extends Component {
@@ -23,7 +24,7 @@ class AnimatedPullToRefresh extends Component {
         }
 
         this.DURATION = this.props.duration ?? 1500
-        this.PULLHEIGHT = this.props.pullHeight ?? 10*vh
+        this.PULLHEIGHT = this.props.pullHeight ?? 10 * vh
 
         UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -38,7 +39,7 @@ class AnimatedPullToRefresh extends Component {
             onPanResponderRelease: this._handlePanResponderEnd,
             onPanResponderTerminate: this._handlePanResponderEnd,
             onPanResponderGrant: (evt, gestureState) => {
-     
+
             },
         });
     }
@@ -48,7 +49,7 @@ class AnimatedPullToRefresh extends Component {
 
     UNSAFE_componentWillReceiveProps(props) {
 
-        if (this.props.isRefreshing !== props.isRefreshing) { 
+        if (this.props.isRefreshing !== props.isRefreshing) {
             if (props.isRefreshing && !this.state.showPullAnim) {
                 this.onRefresh()
 
@@ -66,19 +67,19 @@ class AnimatedPullToRefresh extends Component {
         return !this.state.isScrollFree;
     }
 
- 
+
     _handlePanResponderMove = (e, gestureState) => {
         if (!this.props.isRefreshing) {
-       
+
             if ((gestureState.dy >= 0 && this.state.scrollY._value === 0)) {
-         
+
                 this.state.refreshHeight.setValue(-1 * gestureState.dy * .35);
- 
+
 
                 if (!this.state.showPullAnim)
                     this.setState({ showPullAnim: true })
             } else {
- 
+
                 this.refs.scrollComponentRef.scrollTo({ y: -1 * gestureState.dy, animated: true });
                 if (this.state.showPullAnim) {
                     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
@@ -209,7 +210,7 @@ class AnimatedPullToRefresh extends Component {
                 animationStyle,
             ]}>
                 <LottieView
-                    source={this.props.onPullAnimationSrc}
+                    source={this.props.pullAnimationSource}
                     progress={animateProgress}
                 />
             </Animated.View>
@@ -225,7 +226,7 @@ class AnimatedPullToRefresh extends Component {
                 ]}>
                     <LottieView
                         style={[{ opacity: (this.props.isRefreshing && !this.state.isRefreshAnimationStarted) ? 1 : 0 }]}
-                        source={this.props.onStartRefreshAnimationSrc}
+                        source={this.props.startRefreshAnimationSource}
                         progress={this.state.initAnimationProgress}
                     />
                 </Animated.View>
@@ -237,7 +238,7 @@ class AnimatedPullToRefresh extends Component {
                 ]}>
                     <LottieView
                         style={[{ opacity: this.state.isRefreshAnimationStarted && !this.state.isRefreshAnimationEnded ? 1 : 0 }]}
-                        source={this.props.onRefreshAnimationSrc} 
+                        source={this.props.refreshAnimationSource}
                         progress={this.state.repeatAnimationProgress}
                     />
                 </Animated.View>
@@ -249,7 +250,7 @@ class AnimatedPullToRefresh extends Component {
                 ]}>
                     <LottieView
                         style={[{ opacity: this.state.isRefreshAnimationEnded ? 1 : 0 }]}
-                        source={this.props.onEndRefreshAnimationSrc}
+                        source={this.props.endRefreshAnimationSource}
                         progress={this.state.finalAnimationProgress}
                     />
                 </Animated.View>
@@ -282,8 +283,8 @@ class AnimatedPullToRefresh extends Component {
             outputRange: [1, 0],
             extrapolate: 'clamp',
         });
- 
- 
+
+
 
         const animationStyle = {
             position: 'absolute',
@@ -291,7 +292,7 @@ class AnimatedPullToRefresh extends Component {
             width: Dimensions.get('window').width,
             height: animateHeight
         }
- 
+
 
         return (
             <View
@@ -319,7 +320,7 @@ class AnimatedPullToRefresh extends Component {
                         }]
                     }}
                 >
-                    {React.cloneElement(this.props.contentView, {
+                    {React.cloneElement(this.props.renderElement, {
                         scrollEnabled: false,
                         ref: 'scrollComponentRef',
                         key: 'scm'
@@ -331,6 +332,20 @@ class AnimatedPullToRefresh extends Component {
         );
     }
 }
+
+
+AnimatedPullToRefresh.propTypes = {
+    isRefreshing: PropTypes.bool,
+    onRefresh: PropTypes.func,
+    pullHeight: PropTypes.number,
+    backgroundColor: PropTypes.string,
+    renderElement: PropTypes.element,
+    duration: PropTypes.number,
+    pullAnimationSource: PropTypes.any,
+    startRefreshAnimationSource: PropTypes.any,
+    refreshAnimationSource: PropTypes.any,
+    endRefreshAnimationSource: PropTypes.any,
+};
 
 
 

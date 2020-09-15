@@ -143,6 +143,10 @@ export default App;
 | refreshAnimationSource   | Animation which will run while refreshing| Animation json  | both | Yes
 | endRefreshAnimationSource   | Animation which will run when refreshing is changed to false| Animation json  | both | Yes
 
+### Todos
+We aim to make this package even more robust and powerful by adding following features in the upcoming releases:
+ - Refresh area background color change as we pull it down or release
+
 
 License
 ----

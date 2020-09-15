@@ -31,7 +31,7 @@ class AnimatedPullToRefresh extends Component {
 
 
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this._panResponder = PanResponder.create({
             onStartShouldSetPanResponder: this._handleStartShouldSetPanResponder,
             onMoveShouldSetPanResponder: this._handleMoveShouldSetPanResponder,

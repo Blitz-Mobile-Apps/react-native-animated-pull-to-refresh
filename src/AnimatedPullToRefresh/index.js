@@ -339,7 +339,6 @@ AnimatedPullToRefresh.propTypes = {
     onRefresh: PropTypes.func,
     pullHeight: PropTypes.number,
     backgroundColor: PropTypes.string,
-    renderElement: PropTypes.element,
     duration: PropTypes.number,
     pullAnimationSource: PropTypes.any,
     startRefreshAnimationSource: PropTypes.any,

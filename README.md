@@ -34,6 +34,12 @@ $ cd ios
 $ pod install
 ```
 
+### Demo
+#### Scrollview 
+![](https://raw.githubusercontent.com/Blitz-Mobile-Apps/react-native-animated-pull-to-refresh/master/gifs/scrollview.gif)
+
+#### FlatList with multiple animations 
+![](https://raw.githubusercontent.com/Blitz-Mobile-Apps/react-native-animated-pull-to-refresh/master/gifs/flatlist.gif)
 
 ### Usage
 More examples can be found under the **examples** folder.
